@@ -1,1 +1,15 @@
+import pandas
+import joblib
+dataset=pandas.read_csv("Pearson.csv")
 
+
+y = dataset["Son"]
+x = dataset["Father"].values.reshape(1078,1)
+
+
+
+from sklearn.linear_model import LinearRegression
+model=LinearRegression()
+model=model.fit(x,y)
+
+joblib.dump(model, 'height_predictor.pk')
