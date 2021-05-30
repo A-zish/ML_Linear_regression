@@ -1,0 +1,17 @@
+- hosts: localhost
+  gather_facts: false
+  tasks:
+  - name: creating yum repository for docker
+    yum_repository:
+      name: "docker"
+      description: "docker repo"
+      baseurl: "https://download.docker.com/linux/centos/7/x86_64/stable/"      
+      gpgcheck: no
+  - name: download docker-ce
+    command: "yum install docker-ce  -y  --nobest"
+
+  - name: start docker service
+    service:
+        name: "docker"
+        state: started
+        enabled: yes
